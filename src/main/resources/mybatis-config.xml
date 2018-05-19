@@ -3,15 +3,28 @@
                 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--引入类路径下数据库配置文件-->
+    <properties resource="dbconfig.properties"></properties>
+
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/driving_market"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
+                <!--数据源写死的方式-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/driving_market"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="123456"/>-->
+
+                <!--从配置文件中获取数据源的值方式-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+
             </dataSource>
+
         </environment>
     </environments>
     <!--将写好的sql映射文件配置到全局配置文件中-->

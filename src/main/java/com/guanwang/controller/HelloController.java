@@ -20,6 +20,7 @@ public class HelloController {
         System.out.println("--------------hello--------------");
        // model.addAttribute("message", "Hello Spring MVC Framework!");
         model.addAttribute("message","hello------------------");
+
         return "hello";
     }
 //@RequestMapping("/hello")
