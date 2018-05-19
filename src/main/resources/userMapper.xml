@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace:名称空间
+
+-->
+<mapper namespace="com.guanwang.dao.mapper.UserMapper">
+    <select id="selectUserById" resultType="com.guanwang.entity.User">
+    select market_id userId,market_username userName ,market_pwd pwd ,use_time loginTmie from market_user where market_id = #{id}
+  </select>
+</mapper>

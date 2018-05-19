@@ -1,10 +1,12 @@
 package com.guanwang.entity;
 
+import java.sql.Timestamp;
+
 public class User {
     private String userId;
     private String userName;
     private String pwd;
-    private String loginTmie;
+    private Timestamp loginTmie;
     private String logoutTime;
 
     public String getUserId() {
@@ -31,11 +33,11 @@ public class User {
         this.pwd = pwd;
     }
 
-    public String getLoginTmie() {
+    public Timestamp getLoginTmie() {
         return loginTmie;
     }
 
-    public void setLoginTmie(String loginTmie) {
+    public void setLoginTmie(Timestamp loginTmie) {
         this.loginTmie = loginTmie;
     }
 
