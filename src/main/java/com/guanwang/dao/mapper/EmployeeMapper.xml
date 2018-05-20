@@ -8,7 +8,25 @@
 
 -->
 <mapper namespace="com.guanwang.dao.mapper.EmployeeMapper">
+    <!--查询-->
     <select id="selectEmployeeById" resultType="com.guanwang.entity.Employee">
-    select * from employee where e_id = #{id}
+    select * from employee where e_id = #{eId}
   </select>
+    <!--增加-->
+    <insert id="addEmployee">
+        insert into employee(username,pwd,iphone,emaile,job_date,address)
+        values(#{username},#{pwd},#{iphone},#{emaile},#{jobDate},#{address});
+    </insert>
+
+    <!--更新-->
+    <update id="updateEmplyee" >
+        update employee set username=#{username},pwd=#{pwd},iphone=#{iphone},emaile=#{emaile},
+        job_date=#{jobDate},address=#{address}
+        where e_id=#{eId}
+    </update>
+
+    <!--删除-->
+    <delete id="delEmployee">
+        delete from employee where e_id=#{eId}
+    </delete>
 </mapper>

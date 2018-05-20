@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
 
 public class MybatisTest {
     /**
@@ -88,5 +89,47 @@ public class MybatisTest {
         }
     }
 
+
+    /**
+     * 测试增删改
+     */
+    @Test
+    public void testEmpMapper() throws IOException {
+       //(1)获取sqlSessionFactory对象
+       String resource="mybatis-config.xml" ;
+        InputStream inputStream=Resources.getResourceAsStream(resource);
+       SqlSessionFactory sqlSessionFactory= new SqlSessionFactoryBuilder().build(inputStream);
+
+       //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession=sqlSessionFactory.openSession();
+        try {
+
+
+        //（3）获取代理对象
+        EmployeeMapper employeeMapper=sqlSession.getMapper(EmployeeMapper.class);
+
+        //new Employee类
+        Employee employee=new Employee();
+        employee.seteId(3);
+        employee.setUsername("hott");
+        employee.setPwd("123456");
+        employee.setIphone("15287990000");
+        employee.setEmaile("hoot@qq.com");
+        String date="2018-05-20 13:10:03";
+        Timestamp timestamp=Timestamp.valueOf(date);
+        employee.setJobDate(timestamp);
+        employee.setAddress("贵阳市会展城中华中路25号");
+        //调用增加方法
+      // employeeMapper.addEmployee(employee);
+            //调用修改方法
+       // employeeMapper.updateEmplyee(employee);
+            //调用删除方法
+            employeeMapper.delEmployee(3);
+        //(4)提交事务
+        sqlSession.commit();
+        }finally {
+            sqlSession.close();
+        }
+    }
 
 }
