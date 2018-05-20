@@ -1,6 +1,8 @@
 package test;
 
+import com.guanwang.dao.mapper.EmployeeMapper;
 import com.guanwang.dao.mapper.UserMapper;
+import com.guanwang.entity.Employee;
 import com.guanwang.entity.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -65,5 +67,26 @@ public class MybatisTest {
 
 
     }
+    @Test
+    public void testEmployeeMapper() throws IOException {
+        //（1）获取sqlsessionFactory对象
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = null;
+
+        inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        //(2)获取sqlsession对象
+        SqlSession sqlSession =sqlSessionFactory.openSession();
+        try {
+            EmployeeMapper employeeMapper =sqlSession.getMapper(EmployeeMapper.class);
+            Employee employee =employeeMapper.selectEmployeeById(1);
+            System.out.println("interface------"+employee.getUsername()+"---"+employee.getJobDate());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+    }
+
 
 }
