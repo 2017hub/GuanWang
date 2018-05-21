@@ -33,5 +33,6 @@
     <mappers>
         <mapper resource="userMapper.xml"/>
         <mapper resource="com\guanwang\dao\mapper\EmployeeMapper.xml"/>
+        <mapper resource="com\guanwang\dao\mapper\DeptMapper.xml"/>
     </mappers>
 </configuration>

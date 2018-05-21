@@ -8,5 +8,14 @@
 
 -->
 <mapper namespace="com.guanwang.dao.mapper.DeptMapper">
-
+    <resultMap id="deptMap" type="com.guanwang.entity.Dept">
+        <!--主键-->
+        <id column="d_id" property="dId"/>
+        <result column="d_name" property="dName"/>
+    </resultMap>
+    
+    <!-- 查询-->
+    <select id="getDeptById" resultMap="deptMap" >
+        select * from dept where d_id=#{dId}
+    </select>
 </mapper>

@@ -8,6 +8,9 @@ import java.util.Map;
 
 public interface EmployeeMapper {
 
+    //分步查询
+    public Employee getEmpByStep(int eId);
+
     //联合查询的另一种方式
     public Employee getEmployeeAndDeptById(int eId);
 

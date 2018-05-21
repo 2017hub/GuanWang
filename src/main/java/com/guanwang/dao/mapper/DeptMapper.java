@@ -1,5 +1,8 @@
 package com.guanwang.dao.mapper;
 
-public interface DeptMapper {
+import com.guanwang.entity.Dept;
 
+public interface DeptMapper {
+    //查询
+    public Dept getDeptById(int dId);
 }

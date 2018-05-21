@@ -8,7 +8,8 @@
 
 -->
 <mapper namespace="com.guanwang.dao.mapper.EmployeeMapper">
-    <!--自定义返回值resultMap-->
+
+    <!--自定义返回值resultMap，级联属性-->
     <resultMap id="myMap" type="com.guanwang.entity.Employee">
         <!--主键-->
         <id column="e_id" property="eId"/>
@@ -22,6 +23,31 @@
         <result column="d_name" property="dept.dName"/>
     </resultMap>
 
+
+    <!--分步查询-->
+    <resultMap id="stepMap" type="com.guanwang.entity.Employee">
+        <!--主键-->
+        <id column="e_id" property="eId"/>
+        <result column="username" property="username"/>
+        <result column="pwd" property="pwd"/>
+        <result column="iphone" property="iphone"/>
+        <result column="emaile" property="emaile"/>
+        <result column="job_date" property="jobDate"/>
+        <result column="address" property="address"/>
+        <association property="dept"
+                     select="com.guanwang.dao.mapper.DeptMapper.getDeptById"
+                     column="d_id">
+        </association>
+    </resultMap>
+    <select id="getEmpByStep" resultMap="stepMap" >
+        select e.e_id,e.username,e.pwd,e.iphone,e.emaile,e.address,e.d_id from employee e where e.e_id=#{eId}
+
+    </select>
+
+
+
+
+    <!--嵌套查询-->
     <resultMap id="associcationMap" type="com.guanwang.entity.Employee">
         <!--主键-->
         <id column="e_id" property="eId"/>

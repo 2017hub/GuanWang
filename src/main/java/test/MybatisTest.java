@@ -349,4 +349,32 @@ public void testEmpResultMap() throws IOException {
         }
     }
 
+
+    //测试分步查询
+    @Test
+    public void testEmpByStep() throws IOException {
+        //(1)获取sqlSessionFactory对象
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+
+            //（3）获取代理对象
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+
+            //分步查询
+           Employee employee=employeeMapper.getEmpByStep(2);
+            System.out.println("------------->"+employee.getUsername()+"---->"+employee.getDept().getdName());
+            //(4)提交事务
+            sqlSession.commit();
+
+        } finally {
+            sqlSession.close();
+        }
+    }
+
+
 }
