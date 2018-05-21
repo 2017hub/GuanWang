@@ -10,6 +10,18 @@ public class Employee {
     private String emaile;
     private Timestamp jobDate;
     private String address;
+    private Dept dept;
+
+    public Employee() {
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
 
     public int geteId() {
         return eId;

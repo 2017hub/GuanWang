@@ -8,6 +8,9 @@ import java.util.Map;
 
 public interface EmployeeMapper {
 
+    //联合查询员工信息和与之对应的部门信息
+    public Employee getEmpAndDeptById(int eId);
+
     //测试自定义返回值
     public Employee selectEmpById(int eId);
 

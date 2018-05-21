@@ -18,7 +18,15 @@
         <result column="emaile" property="emaile"/>
         <result column="job_date" property="jobDate"/>
         <result column="address" property="address"/>
+        <result column="d_id" property="dept.dId"/>
+        <result column="d_name" property="dept.dName"/>
     </resultMap>
+
+    <!--联合查询，员工信息和与之对应的部门信息-->
+    <select id="getEmpAndDeptById" resultMap="myMap" >
+        select e.e_id,e.username,e.pwd,e.iphone,e.emaile,e.address,d.d_id,d.d_name  from employee e ,dept d
+        where e.e_id=d.d_id and e.e_id=#{eId}
+    </select>
 
     <!--查询,自定义返回值resultMap-->
     <select id="selectEmpById" resultMap="myMap">

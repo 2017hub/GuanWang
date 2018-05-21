@@ -293,4 +293,32 @@ public void testEmpResultMap() throws IOException {
         sqlSession.close();
     }
 }
+
+    //测试联合查询
+    @Test
+    public void testEmpAndDept() throws IOException {
+        //(1)获取sqlSessionFactory对象
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+
+            //（3）获取代理对象
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+
+            //联合查询
+            Employee employee=employeeMapper.getEmpAndDeptById(1);
+            System.out.println("-------------->"+employee.getUsername());
+            System.out.println("---------------->"+employee.getDept().getdId()+"====="+employee.getDept().getdName());
+            //(4)提交事务
+            sqlSession.commit();
+
+        } finally {
+            sqlSession.close();
+        }
+    }
+
 }
