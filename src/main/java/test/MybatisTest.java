@@ -12,7 +12,12 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class MybatisTest {
     /**
@@ -110,26 +115,159 @@ public class MybatisTest {
 
         //new Employee类
         Employee employee=new Employee();
-        employee.seteId(3);
-        employee.setUsername("hott");
+      //  employee.seteId(3);
+        employee.setUsername("hapyy");
         employee.setPwd("123456");
-        employee.setIphone("15287990000");
-        employee.setEmaile("hoot@qq.com");
-        String date="2018-05-20 13:10:03";
+        employee.setIphone("15287990999");
+        employee.setEmaile("happy@qq.com");
+        String date="2018-04-20 09:10:03";
         Timestamp timestamp=Timestamp.valueOf(date);
         employee.setJobDate(timestamp);
-        employee.setAddress("贵阳市会展城中华中路25号");
+        employee.setAddress("贵阳市会展城会展南路89号");
         //调用增加方法
-      // employeeMapper.addEmployee(employee);
+            employeeMapper.addEmployee(employee);
+            System.out.println("-----获取自增主键------"+employee.geteId());
             //调用修改方法
        // employeeMapper.updateEmplyee(employee);
             //调用删除方法
-            employeeMapper.delEmployee(3);
+          //  employeeMapper.delEmployee(3);
         //(4)提交事务
         sqlSession.commit();
+
         }finally {
             sqlSession.close();
         }
     }
+
+    /**
+     * 测试转入参数不是数据模型，而是转入map集合参数
+     */
+
+    @Test
+    public void testEmpMap() throws IOException {
+        //(1)获取sqlSessionFactory对象
+        String resource="mybatis-config.xml" ;
+        InputStream inputStream=Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory= new SqlSessionFactoryBuilder().build(inputStream);
+
+        //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession=sqlSessionFactory.openSession();
+        try {
+
+
+            //（3）获取代理对象
+            EmployeeMapper employeeMapper=sqlSession.getMapper(EmployeeMapper.class);
+
+            //转入的是一个集合map
+            Map<String,Object> map=new HashMap<String ,Object>();
+                                map.put("eId",2);
+
+            //调用增加方法
+            Employee employee=employeeMapper.selectEmpMap(map);
+            System.out.println("-----map------"+employee.geteId()+"名字："+employee.getUsername());
+            //调用修改方法
+            // employeeMapper.updateEmplyee(employee);
+            //调用删除方法
+            //  employeeMapper.delEmployee(3);
+            //(4)提交事务
+            sqlSession.commit();
+
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+
+    /**
+     * 测试查询返回list集合
+     */
+
+    @Test
+    public void testEmpList() throws IOException {
+        //(1)获取sqlSessionFactory对象
+        String resource="mybatis-config.xml" ;
+        InputStream inputStream=Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory= new SqlSessionFactoryBuilder().build(inputStream);
+
+        //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession=sqlSessionFactory.openSession();
+        try {
+
+
+            //（3）获取代理对象
+            EmployeeMapper employeeMapper=sqlSession.getMapper(EmployeeMapper.class);
+
+
+            String name="%w%";
+            //调用方法
+           List<Employee> list=employeeMapper.getEmpListByName(name);
+            for (Employee em:list) {
+                System.out.println("______"+em.getUsername());
+            }
+            //调用修改方法
+            // employeeMapper.updateEmplyee(employee);
+            //调用删除方法
+            //  employeeMapper.delEmployee(3);
+            //(4)提交事务
+            sqlSession.commit();
+
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+
+    //测试查询返回值Map集合
+    @Test
+    public void testEmpployeeMap() throws IOException {
+        //(1)获取sqlSessionFactory对象
+        String resource="mybatis-config.xml" ;
+        InputStream inputStream=Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory= new SqlSessionFactoryBuilder().build(inputStream);
+
+        //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession=sqlSessionFactory.openSession();
+        try {
+
+            //（3）获取代理对象
+            EmployeeMapper employeeMapper=sqlSession.getMapper(EmployeeMapper.class);
+                  Map<String,Object> map = employeeMapper.getEmpMapById(1);
+                  System.out.println("-----mapById-----"+map);
+
+
+            //(4)提交事务
+            sqlSession.commit();
+
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+
+    //测试查询返回多条Map集合
+    @Test
+    public void testEmpByName() throws IOException {
+        //(1)获取sqlSessionFactory对象
+        String resource="mybatis-config.xml" ;
+        InputStream inputStream=Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory= new SqlSessionFactoryBuilder().build(inputStream);
+
+        //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession=sqlSessionFactory.openSession();
+        try {
+
+            //（3）获取代理对象
+            EmployeeMapper employeeMapper=sqlSession.getMapper(EmployeeMapper.class);
+
+            Map<Integer,Employee> mapByName =employeeMapper.getEmpMapByName("%w%");
+            System.out.println("----------------"+mapByName);
+            //(4)提交事务
+            sqlSession.commit();
+
+        }finally {
+            sqlSession.close();
+        }
+    }
+
 
 }

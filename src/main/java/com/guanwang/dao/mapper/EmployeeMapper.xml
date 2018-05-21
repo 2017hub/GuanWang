@@ -8,12 +8,35 @@
 
 -->
 <mapper namespace="com.guanwang.dao.mapper.EmployeeMapper">
+
+    <!--   public Map<Integer,Employee> getEmpMapByName(String name);-->
+<select id="getEmpMapByName" resultType="com.guanwang.entity.Employee">
+    select *from employee where username like #{name}
+</select>
+
+
+    <!-- public Map<String ,Object> getEmpMapById(int  eId);-->
+    <select id="getEmpMapById" resultType="map">
+        select * from employee where e_id=#{eId}
+    </select>
+
+    <!-- public List<Employee> getEmpListByName(String name);-->
+    <select id="getEmpListByName" resultType="com.guanwang.entity.Employee">
+        select * from employee where username like #{name}
+    </select>
+
+   <!--   public Employee selectEmpMap(Map<String ,Object> map);-->
+    <select id="selectEmpMap" resultType="com.guanwang.entity.Employee">
+        select * from employee where e_id=#{eId}
+    </select>
+
     <!--查询-->
     <select id="selectEmployeeById" resultType="com.guanwang.entity.Employee">
     select * from employee where e_id = #{eId}
   </select>
     <!--增加-->
-    <insert id="addEmployee">
+    <!--获取自增主键 属性useGeneratedKeys  keyProperty-->
+    <insert id="addEmployee" useGeneratedKeys="true" keyProperty="eId">
         insert into employee(username,pwd,iphone,emaile,job_date,address)
         values(#{username},#{pwd},#{iphone},#{emaile},#{jobDate},#{address});
     </insert>
