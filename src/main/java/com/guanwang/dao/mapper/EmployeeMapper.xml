@@ -22,6 +22,26 @@
         <result column="d_name" property="dept.dName"/>
     </resultMap>
 
+    <resultMap id="associcationMap" type="com.guanwang.entity.Employee">
+        <!--主键-->
+        <id column="e_id" property="eId"/>
+        <result column="username" property="username"/>
+        <result column="pwd" property="pwd"/>
+        <result column="iphone" property="iphone"/>
+        <result column="emaile" property="emaile"/>
+        <result column="job_date" property="jobDate"/>
+        <result column="address" property="address"/>
+        <association property="dept" javaType="com.guanwang.entity.Dept">
+            <id column="d_id" property="dId"/>
+            <result column="d_name" property="dName"/>
+        </association>
+    </resultMap>
+    <!--联合查询的另外一种方式-->
+    <select id="getEmployeeAndDeptById" resultMap="associcationMap" >
+        select e.e_id,e.username,e.pwd,e.iphone,e.emaile,e.address,d.d_id,d.d_name  from employee e ,dept d
+        where e.e_id=d.d_id and e.e_id=#{eId}
+    </select>
+
     <!--联合查询，员工信息和与之对应的部门信息-->
     <select id="getEmpAndDeptById" resultMap="myMap" >
         select e.e_id,e.username,e.pwd,e.iphone,e.emaile,e.address,d.d_id,d.d_name  from employee e ,dept d
