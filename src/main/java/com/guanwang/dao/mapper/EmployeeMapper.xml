@@ -8,6 +8,22 @@
 
 -->
 <mapper namespace="com.guanwang.dao.mapper.EmployeeMapper">
+    <!--自定义返回值resultMap-->
+    <resultMap id="myMap" type="com.guanwang.entity.Employee">
+        <!--主键-->
+        <id column="e_id" property="eId"/>
+        <result column="username" property="username"/>
+        <result column="pwd" property="pwd"/>
+        <result column="iphone" property="iphone"/>
+        <result column="emaile" property="emaile"/>
+        <result column="job_date" property="jobDate"/>
+        <result column="address" property="address"/>
+    </resultMap>
+
+    <!--查询,自定义返回值resultMap-->
+    <select id="selectEmpById" resultMap="myMap">
+    select * from employee where e_id = #{eId}
+  </select>
 
     <!--   public Map<Integer,Employee> getEmpMapByName(String name);-->
 <select id="getEmpMapByName" resultType="com.guanwang.entity.Employee">

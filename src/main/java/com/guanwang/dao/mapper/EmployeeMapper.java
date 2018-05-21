@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface EmployeeMapper {
+
+    //测试自定义返回值
+    public Employee selectEmpById(int eId);
+
     //返回一个对条记录的map,Map<Integer,Employee> 主键值作为Integer,需要在方法上面添加@MapKey("id")
     @MapKey("eId")
     public Map<Integer,Employee> getEmpMapByName(String name);
