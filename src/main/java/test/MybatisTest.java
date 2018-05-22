@@ -405,4 +405,33 @@ public void testEmpBydeptId() throws IOException {
         sqlSession.close();
     }
 }
+
+
+    //测试动态SQl查询条件choose
+    @Test
+    public void testChoose() throws IOException {
+        //(1)获取sqlSessionFactory对象
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+
+            //（3）获取代理对象
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+                Employee employee=new Employee();
+               // employee.seteId(0);
+                employee.setUsername("wenjie");
+                employee.setIphone("15285678970");
+                Employee emps=employeeMapper.selectEmployees(employee);
+                System.out.println("-------->"+emps.getUsername());
+            //(4)提交事务
+            sqlSession.commit();
+
+        } finally {
+            sqlSession.close();
+        }
+    }
 }

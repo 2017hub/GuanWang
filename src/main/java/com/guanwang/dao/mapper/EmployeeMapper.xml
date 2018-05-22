@@ -120,9 +120,29 @@
     </select>
 
     <!--查询-->
+
     <select id="selectEmployeeById" resultType="com.guanwang.entity.Employee">
-    select * from employee where e_id = #{eId}
-  </select>
+        select * from employee where e_id=#{eId}
+    </select>
+
+    <!--动态sql语句的条件choose-->
+    <select id="selectEmployees" resultType="com.guanwang.entity.Employee">
+        select * from employee
+        <where>
+            <choose>
+                <when test="eId>=1">
+                    e_id=#{eId}
+                </when>
+                <when test="username!=null and username!=''">
+                    username=#{username}
+                </when>
+                <otherwise>
+                 1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
     <!--增加-->
     <!--获取自增主键 属性useGeneratedKeys  keyProperty-->
     <insert id="addEmployee" useGeneratedKeys="true" keyProperty="eId">
