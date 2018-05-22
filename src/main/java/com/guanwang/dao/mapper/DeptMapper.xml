@@ -18,4 +18,31 @@
     <select id="getDeptById" resultMap="deptMap" >
         select * from dept where d_id=#{dId}
     </select>
+
+    <!--关联查询，查询部门时，查询部门下的所有员工-->
+    <resultMap id="deptAndEmpMap" type="com.guanwang.entity.Dept">
+        <!--主键-->
+        <id column="d_id" property="dId"/>
+        <result column="d_name" property="dName"/>
+        <!--部门对应的员工是一个集合而不是一个对象，则不能使用<assioncation>标签而是使用《conllection>-->
+        <collection property="emps" ofType="com.guanwang.entity.Employee">
+            <id column="e_id" property="eId"/>
+            <result column="username" property="username"/>
+            <result column="pwd" property="pwd"/>
+            <result column="iphone" property="iphone"/>
+            <result column="emaile" property="emaile"/>
+            <result column="job_date" property="jobDate"/>
+            <result column="address" property="address"/>
+        </collection>
+
+    </resultMap>
+<!--   public Dept getDeptAndEmpById(int dId);-->
+    <select id="getDeptAndEmpById" resultMap="deptAndEmpMap">
+        SELECT d.`d_id`,d.`d_name`,e.`e_id`,e.`username`,e.`pwd`,e.`iphone`,e.`emaile`,e.`job_date`,e.`address`
+        FROM dept d
+        LEFT JOIN employee e
+        ON d.`d_id`=e.`d_id`
+        WHERE d.`d_id`=#{dId}
+    </select>
+
 </mapper>
