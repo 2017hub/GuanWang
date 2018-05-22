@@ -106,9 +106,9 @@
    <!--   public Employee selectEmpMap(Map<String ,Object> map);-->
     <select id="selectEmpMap" resultType="com.guanwang.entity.Employee">
         select * from employee
-        where
+        <trim prefix="where" prefixOverrides="and">
         <if test="eId!=null">
-             e_id=#{eId}
+          and  e_id=#{eId}
         </if>
         <if test="username!=null and username!=''">
             and username like #{username}
@@ -116,6 +116,7 @@
         <if test="iphone!=null and iphone!=''">
             and iphone=#{iphone}
         </if>
+        </trim>
     </select>
 
     <!--查询-->
