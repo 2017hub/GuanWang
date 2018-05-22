@@ -143,6 +143,23 @@
         </where>
     </select>
 
+    <!--动态SQL增加员工-->
+    <update id="addEmpsById">
+        update employee
+        <set>
+            <if test="username!=null and username!=''" >
+                username=#{username},
+            </if>
+            <if test="iphone!=null and iphone!=''">
+                iphone=#{iphone},
+            </if>
+        </set>
+        <where>
+            e_id=#{eId}
+        </where>
+    </update>
+
+
     <!--增加-->
     <!--获取自增主键 属性useGeneratedKeys  keyProperty-->
     <insert id="addEmployee" useGeneratedKeys="true" keyProperty="eId">
@@ -150,9 +167,20 @@
         values(#{username},#{pwd},#{iphone},#{emaile},#{jobDate},#{address});
     </insert>
 
+
+    <!--//动态SQL语句的批量插入-->
+    <!--public void addEmployees(@Param("epms") List<Employee> epms);-->
+    <insert id="addEmployees">
+         insert into employee(username,pwd,iphone,emaile,job_date,address,d_id)
+          values
+         <foreach collection="epms" item="epm" separator=",">
+             (#{epm.username},#{epm.pwd},#{epm.iphone},#{epm.emaile},#{epm.jobDate},#{epm.address},#{epm.dept.dId})
+         </foreach>
+    </insert>
+
     <!--更新-->
     <update id="updateEmplyee" >
-        update employee set username=#{username},pwd=#{pwd},iphone=#{iphone},emaile=#{emaile},
+        update employee set username=#{username},pwd=#{pwd},iphone=#{iphone},emaile=#{emaile}
         job_date=#{jobDate},address=#{address}
         where e_id=#{eId}
     </update>

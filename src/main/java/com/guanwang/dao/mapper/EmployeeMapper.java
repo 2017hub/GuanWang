@@ -2,11 +2,18 @@ package com.guanwang.dao.mapper;
 
 import com.guanwang.entity.Employee;
 import org.apache.ibatis.annotations.MapKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
 
 public interface EmployeeMapper {
+
+    //动态SQL语句的批量插入
+    public void addEmployees(@Param("epms") List<Employee> epms);
+
+    //动态SQL语句添加员工
+    public void addEmpsById(Employee employee);
 
     //动态sql查询员工
     public Employee selectEmployees(Employee employee);
