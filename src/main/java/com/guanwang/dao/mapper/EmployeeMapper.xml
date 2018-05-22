@@ -9,6 +9,12 @@
 -->
 <mapper namespace="com.guanwang.dao.mapper.EmployeeMapper">
 
+    <!--根据部门Id查询部门下的所有员工 public List<Employee> getEmpByDeptId(int dId);-->
+
+    <select id="getEmpByDeptId" resultType="com.guanwang.entity.Employee">
+        select * from employee where d_id=#{dId}
+    </select>
+
     <!--自定义返回值resultMap，级联属性-->
     <resultMap id="myMap" type="com.guanwang.entity.Employee">
         <!--主键-->

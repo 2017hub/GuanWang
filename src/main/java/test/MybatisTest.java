@@ -376,5 +376,31 @@ public void testEmpResultMap() throws IOException {
         }
     }
 
+//测试根据部门Id查询部门对应的所有的员工
+@Test
+public void testEmpBydeptId() throws IOException {
+    //(1)获取sqlSessionFactory对象
+    String resource = "mybatis-config.xml";
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
+    //(2)获取sqlSession对象(sqlsession不带参数的不能自动提交事务，需要手动添加)
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    try {
+
+        //（3）获取代理对象
+        EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+
+        List<Employee> list=employeeMapper.getEmpByDeptId(1);
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println("--------->"+list.get(i).getUsername());
+        }
+        //(4)提交事务
+        sqlSession.commit();
+
+    } finally {
+        sqlSession.close();
+    }
+}
 }

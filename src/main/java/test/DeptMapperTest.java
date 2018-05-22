@@ -62,4 +62,30 @@ public class DeptMapperTest {
 
 
     }
+
+    //测试分步查询部门对应的所有员工信息
+    @Test
+    public void testDeptAndEmpByStemp() throws IOException {
+        //（1）获取sqlsessionFactory对象
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = null;
+
+        inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        //(2)获取sqlsession对象
+        SqlSession sqlSession =sqlSessionFactory.openSession();
+        try {
+            DeptMapper deptMapper =sqlSession.getMapper(DeptMapper.class);
+            Dept dept=deptMapper.getDeptAndEmpByStep(1);
+            System.out.println("-------->"+dept.getEmps());
+            //(3)、事务提交
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            sqlSession.close();
+        }
+
+
+    }
 }

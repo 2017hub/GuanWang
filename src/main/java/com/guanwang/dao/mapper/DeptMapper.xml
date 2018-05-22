@@ -45,4 +45,19 @@
         WHERE d.`d_id`=#{dId}
     </select>
 
+    <!--分步查询部门对应的所有员工-->
+    <!-- public Dept getDeptAndEmpByStep(int dId);-->
+    <resultMap id="deptByStempMap" type="com.guanwang.entity.Dept">
+        <id column="d_id" property="dId"/>
+        <result column="d_name" property="dName"/>
+        <collection property="emps"
+                    select="com.guanwang.dao.mapper.EmployeeMapper.getEmpByDeptId"
+                    column="d_id">
+        </collection>
+    </resultMap>
+    <select id="getDeptAndEmpByStep" resultMap="deptByStempMap">
+        select d_id,d_name from dept where d_id=#{dId}
+    </select>
+
+
 </mapper>

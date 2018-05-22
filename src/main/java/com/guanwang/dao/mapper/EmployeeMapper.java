@@ -8,6 +8,8 @@ import java.util.Map;
 
 public interface EmployeeMapper {
 
+    //根据部门id查询部门下的所有员工
+    public List<Employee> getEmpByDeptId(int dId);
     //分步查询
     public Employee getEmpByStep(int eId);
 
