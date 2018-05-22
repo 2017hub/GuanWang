@@ -101,9 +101,21 @@
         select * from employee where username like #{name}
     </select>
 
+
+    <!--添加动态SQl语句-->
    <!--   public Employee selectEmpMap(Map<String ,Object> map);-->
     <select id="selectEmpMap" resultType="com.guanwang.entity.Employee">
-        select * from employee where e_id=#{eId}
+        select * from employee
+        where
+        <if test="eId!=null">
+             e_id=#{eId}
+        </if>
+        <if test="username!=null and username!=''">
+            and username like #{username}
+        </if>
+        <if test="iphone!=null and iphone!=''">
+            and iphone=#{iphone}
+        </if>
     </select>
 
     <!--查询-->

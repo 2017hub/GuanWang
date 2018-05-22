@@ -160,9 +160,11 @@ public class MybatisTest {
 
             //转入的是一个集合map
             Map<String,Object> map=new HashMap<String ,Object>();
-                                map.put("eId",2);
+                                map.put("eId",1);
+                                map.put("username","wenjie");
+                                map.put("iphone","15285678970");
 
-            //调用增加方法
+            //调用方法
             Employee employee=employeeMapper.selectEmpMap(map);
             System.out.println("-----map------"+employee.geteId()+"名字："+employee.getUsername());
             //调用修改方法

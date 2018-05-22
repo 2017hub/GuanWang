@@ -77,7 +77,8 @@ public class DeptMapperTest {
         try {
             DeptMapper deptMapper =sqlSession.getMapper(DeptMapper.class);
             Dept dept=deptMapper.getDeptAndEmpByStep(1);
-            System.out.println("-------->"+dept.getEmps());
+            System.out.println("------->"+dept.getdName());
+           // System.out.println("-------->"+dept.getEmps());
             //(3)、事务提交
             sqlSession.commit();
         } catch (Exception e) {
