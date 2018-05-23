@@ -167,17 +167,36 @@
         values(#{username},#{pwd},#{iphone},#{emaile},#{jobDate},#{address});
     </insert>
 
+    <!--sql标签 可以有重用的SQL片段-->
+    <sql id="insertEmployee" >
+       username,pwd,iphone,emaile,job_date,address,d_id
+    </sql>
+
+<!--引用了sql标签中常用重复写的字段-->
+    <insert id="addEmployees">
+    insert into employee(
+        <include refid="insertEmployee"></include>
+        )
+    values
+    <foreach collection="epms" item="epm" separator=",">
+    (#{epm.username},#{epm.pwd},#{epm.iphone},#{epm.emaile},#{epm.jobDate},#{epm.address},#{epm.dept.dId})
+    </foreach>
+    </insert>
 
     <!--//动态SQL语句的批量插入-->
     <!--public void addEmployees(@Param("epms") List<Employee> epms);-->
-    <insert id="addEmployees">
-         insert into employee(username,pwd,iphone,emaile,job_date,address,d_id)
-          values
-         <foreach collection="epms" item="epm" separator=",">
-             (#{epm.username},#{epm.pwd},#{epm.iphone},#{epm.emaile},#{epm.jobDate},#{epm.address},#{epm.dept.dId})
-         </foreach>
-    </insert>
+    <!--<insert id="addEmployees">-->
+       <!--insert into employee(username,pwd,iphone,emaile,job_date,address,d_id)-->
+          <!--values-->
+         <!--<foreach collection="epms" item="epm" separator=",">-->
+             <!--(#{epm.username},#{epm.pwd},#{epm.iphone},#{epm.emaile},#{epm.jobDate},#{epm.address},#{epm.dept.dId})-->
+         <!--</foreach>-->
+    <!--</insert>-->
 
+    
+    
+    
+    
     <!--更新-->
     <update id="updateEmplyee" >
         update employee set username=#{username},pwd=#{pwd},iphone=#{iphone},emaile=#{emaile}
