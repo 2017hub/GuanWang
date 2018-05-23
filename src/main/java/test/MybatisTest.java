@@ -81,15 +81,25 @@ public class MybatisTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         //(2)获取sqlsession对象
         SqlSession sqlSession =sqlSessionFactory.openSession();
-        try {
+        //测试二级缓存
+        SqlSession sqlSession2 =sqlSessionFactory.openSession();
+        System.out.println(sqlSession==sqlSession2);
+     //   try {
             EmployeeMapper employeeMapper =sqlSession.getMapper(EmployeeMapper.class);
             Employee employee =employeeMapper.selectEmployeeById(1);
-            System.out.println("interface------"+employee.getUsername()+"---"+employee.getJobDate());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
+            System.out.println("interface------"+employee);
             sqlSession.close();
-        }
+
+        EmployeeMapper employeeMapper2 =sqlSession2.getMapper(EmployeeMapper.class);
+        Employee employee2 =employeeMapper2.selectEmployeeById(1);
+        System.out.println("------二级缓存-------->"+employee2);
+        sqlSession2.close();
+
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }finally {
+//            sqlSession.close();
+//        }
     }
 
 

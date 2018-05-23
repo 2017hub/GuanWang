@@ -6,6 +6,8 @@
     <!--引入类路径下数据库配置文件-->
     <properties resource="dbconfig.properties"></properties>
     <settings>
+        <!--开启二级缓存，默认也是true,确认的配置都需要显示配置-->
+        <setting name="cacheEnabled" value="true"/>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!--延迟加载配置-->
         <setting name="lazyLoadingEnabled" value="true"/>

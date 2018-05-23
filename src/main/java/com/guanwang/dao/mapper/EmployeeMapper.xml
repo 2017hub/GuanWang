@@ -8,7 +8,9 @@
 
 -->
 <mapper namespace="com.guanwang.dao.mapper.EmployeeMapper">
-
+<!--二级缓存开启-->
+    <!--<cache eviction="LRU" flushInterval="6000" readOnly="false" size="2048"></cache>-->
+    <cache></cache>
     <!--根据部门Id查询部门下的所有员工 public List<Employee> getEmpByDeptId(int dId);-->
 
     <select id="getEmpByDeptId" resultType="com.guanwang.entity.Employee">

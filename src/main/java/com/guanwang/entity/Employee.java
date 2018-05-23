@@ -1,8 +1,9 @@
 package com.guanwang.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Employee {
+public class Employee implements Serializable {
     private int eId;
     private String username;
     private String pwd;
