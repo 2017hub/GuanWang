@@ -6,10 +6,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -18,7 +15,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
-
+@SessionAttributes("emp")
 @Controller
 @RequestMapping("/hello")
 public class HelloController {
@@ -70,6 +67,18 @@ public void testApi(Writer out) throws IOException {
     public String testMap(Map<String ,Object> map){
         map.put("names",Arrays.asList("tom","jerry","wenjie"));
 
+        return "hello";
+    }
+
+    /**
+     * 把模型数据放在session域中
+     */
+    @RequestMapping("/testSession")
+    public String testSession(Map<String ,Object> map){
+        Employee employee=new Employee();
+        employee.setUsername("tom");
+        employee.setIphone("152878787");
+        map.put("emp",employee);
         return "hello";
     }
 
