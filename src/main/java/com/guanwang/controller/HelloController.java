@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Map;
 
 
 @Controller
@@ -59,6 +61,16 @@ public void testApi(Writer out) throws IOException {
        ModelAndView modelAndView=new ModelAndView(view);
        modelAndView.addObject("time",new Date());
        return modelAndView;
+    }
+
+    /**
+     * Map类型作为参数，开发中比较常用，就是页面返回一个map集合
+     */
+    @RequestMapping("/testMap")
+    public String testMap(Map<String ,Object> map){
+        map.put("names",Arrays.asList("tom","jerry","wenjie"));
+
+        return "hello";
     }
 
 }
