@@ -4,6 +4,19 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <!--字符编码过滤器SpringMVC解决乱码的配置过滤器-->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 <!--springmvc核心控制器-->
   <servlet>
     <servlet-name>HelloWeb</servlet-name>
