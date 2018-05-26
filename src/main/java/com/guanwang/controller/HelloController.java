@@ -25,7 +25,7 @@ public class HelloController {
         System.out.println("--------------hello--------------");
        // model.addAttribute("message", "Hello Spring MVC Framework!");
         model.addAttribute("message","hello------------------");
-
+            int sum =10/0;
         return "hello";
     }
 //@RequestMapping("/hello")
