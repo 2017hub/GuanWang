@@ -11,9 +11,13 @@ public class loginController {
     @RequestMapping("/login")
     public String login(String username,String pwd){
         System.out.println("------->"+username+"---"+pwd);
+        int num=10/0;
         if("admin".equals(username)&&"123".equals(pwd)){
             return "success";
         }
         return "redirect:/index.jsp";
     }
+
+
+
 }
