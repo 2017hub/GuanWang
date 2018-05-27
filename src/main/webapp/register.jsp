@@ -37,23 +37,23 @@
     <table>
         <tr>
             <td>昵称</td>
-            <td><input type="text" name="nick"   placeholder="请输入4~10位汉语"></td>
+            <td><input type="text" name="nick"   placeholder="请输入4~10位汉语"><span style="color: red">${errorMap.nick}</span></td>
         </tr>
         <tr>
             <td>密码</td>
-            <td><input type="password" name="password"  placeholder="请输入3~6位密码"></td>
+            <td><input type="password" name="password"  placeholder="请输入3~6位密码">${errorMap.password}</td>
         </tr>
         <tr>
             <td>手机号</td>
-            <td><input type="text" name="phone" placeholder="请输入正确格式的手机号"></td>
+            <td><input type="text" name="phone" placeholder="请输入正确格式的手机号">${errorMap.phone}</td>
         </tr>
         <tr>
             <td>邮箱</td>
-            <td><input type="text" name="emaile"  placeholder="请输入正确的邮箱格式"></td>
+            <td><input type="text" name="emaile"  placeholder="请输入正确的邮箱格式">${errorMap.emaile}</td>
         </tr>
         <tr>
             <td>年龄</td>
-            <td><input type="text" name="age"  ></td>
+            <td><input type="text" name="age"  >${errorMap.age}</td>
         </tr>
         <tr>
             <td><input type="submit" value="注册"></td>

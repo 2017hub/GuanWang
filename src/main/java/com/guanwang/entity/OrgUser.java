@@ -8,13 +8,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 public class OrgUser {
-    @Pattern(regexp="[\\u4e00-\\u9fa5]{4,10}",message = "昵称，为4~10个汉字！")
+    @Pattern(regexp="[\\u4e00-\\u9fa5]{4,10}",message = "* 昵称，为4~10个汉字！")
     private String nick;//昵称
 
-    @Pattern(regexp = "\\w{3,6}",message = "密码为3~6个数字")
+    @Pattern(regexp = "\\w{3,6}",message = "* 密码为3~6个数字")
     private String password;//密码
 
-    @Pattern(regexp = "1[3578]\\d{9}",message = "请输入正确的手机号！")
+    @Pattern(regexp = "1[3578]\\d{9}",message = "* 请输入正确的手机号！")
     private String phone;//手机号
 
     @Email

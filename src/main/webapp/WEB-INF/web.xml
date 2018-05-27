@@ -33,4 +33,11 @@
     <servlet-name>HelloWeb</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  <!--配置错误页面404-->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errornull.jsp</location>
+  </error-page>
+  
 </web-app>
