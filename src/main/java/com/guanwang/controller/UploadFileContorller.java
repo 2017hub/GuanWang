@@ -20,7 +20,7 @@ public class UploadFileContorller {
     @RequestMapping(value = "/sigonFile",method =RequestMethod.POST)
     public String uploadFile(@RequestParam("bigHeadImage")MultipartFile file, HttpServletRequest request) throws Exception {
             //getOriginalFilename()方法是获取上传文件的文件名
-       String originalFilename= file.getOriginalFilename();
+       String originalFilename= System.currentTimeMillis()+file.getOriginalFilename();
         System.out.println("------>"+originalFilename);
         //getName()方法是获取上传文件jsp<input>file控件的name值
         System.out.println("------>"+file.getName());
