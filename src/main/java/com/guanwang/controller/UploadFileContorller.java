@@ -1,5 +1,6 @@
 package com.guanwang.controller;
 
+import com.guanwang.utils.UploadFiles;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,19 +47,23 @@ public class UploadFileContorller {
      */
     @RequestMapping(value = "/uploadFiles",method = RequestMethod.POST)
     public String mutiFileUpload(MultipartRequest files,HttpServletRequest request) throws Exception {
-        Map<String,MultipartFile> filesMap=files.getFileMap();
-        Set<String> keySet =filesMap.keySet();
-        for (String key:keySet) {
-            MultipartFile file=filesMap.get(key);
-           String originalFilename= file.getOriginalFilename();//获取文件名
-           String path=request.getServletContext().getRealPath("/upload");//动态获取路径
-           String UUID= java.util.UUID.randomUUID().toString();
+//        Map<String,MultipartFile> filesMap=files.getFileMap();
+//        Set<String> keySet =filesMap.keySet();
+//        for (String key:keySet) {
+//            MultipartFile file=filesMap.get(key);
+//           String originalFilename= file.getOriginalFilename();//获取文件名
+//           String path=request.getServletContext().getRealPath("/upload");//动态获取路径
+//           String UUID= java.util.UUID.randomUUID().toString();
+//
+//           String filePath1=path+"\\"+UUID+originalFilename;
+//           File filePath=new File(filePath1);
+//           file.transferTo(filePath);
+//
+//        }
 
-           String filePath1=path+"\\"+UUID+originalFilename;
-           File filePath=new File(filePath1);
-           file.transferTo(filePath);
+        //使用工具类
 
-        }
+        UploadFiles.uploadFiles(request,files);
 
         return "success";
     }
