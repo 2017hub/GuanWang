@@ -9,7 +9,7 @@
     <%--pwd: <input type="password" name="pwd" value=""/><br/>--%>
     <%--<input type="submit" value="submit">--%>
 <%--</form>--%>
-
+<%--单文件上传--%>
 <%--<form action="/upload/sigonFile"  method="post" enctype="multipart/form-data">--%>
     <%--文件：<input type="file" name="bigHeadImage" value=""><br/>--%>
     <%--<input type="submit" value="上传文件">--%>
@@ -21,5 +21,7 @@
     文件3：<input type="file" name="artHeadImage" value=""><br/>
     <input type="submit" value="上传文件">
 </form>
+
+
 </body>
 </html>

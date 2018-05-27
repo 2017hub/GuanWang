@@ -30,4 +30,10 @@
         <!--配置文件上传大小-->
         <property name="maxUploadSize" value="1048576"></property>
     </bean>
+
+    <!--配置hibernate-validator数据校验-->
+    <mvc:annotation-driven validator="validator"/>
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+    </bean>
 </beans>
