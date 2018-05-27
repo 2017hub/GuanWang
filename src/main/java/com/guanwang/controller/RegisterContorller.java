@@ -22,7 +22,7 @@ public class RegisterContorller {
            List<FieldError> errorList = bindingResult.getFieldErrors();//获取所有字段对应的信息
             for (FieldError fieldError:errorList) {
                String fieldName= fieldError.getField();//获取属性名
-                String message=fieldError.getDefaultMessage();//获取属性字段对应的信息
+                String message=fieldError.getDefaultMessage();//获取属性字段对应的错误提示信息
                 System.out.println("-------->"+fieldName+"====="+message);
             }
         }else {
