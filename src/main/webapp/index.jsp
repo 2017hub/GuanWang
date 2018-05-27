@@ -10,8 +10,15 @@
     <%--<input type="submit" value="submit">--%>
 <%--</form>--%>
 
-<form action="/upload/sigonFile"  method="post" enctype="multipart/form-data">
-    文件：<input type="file" name="bigHeadImage" value=""><br/>
+<%--<form action="/upload/sigonFile"  method="post" enctype="multipart/form-data">--%>
+    <%--文件：<input type="file" name="bigHeadImage" value=""><br/>--%>
+    <%--<input type="submit" value="上传文件">--%>
+<%--</form>--%>
+
+<form action="/upload/uploadFiles"  method="post" enctype="multipart/form-data">
+    文件1：<input type="file" name="bigHeadImage" value=""><br/>
+    文件2：<input type="file" name="smallHeadImage" value=""><br/>
+    文件3：<input type="file" name="artHeadImage" value=""><br/>
     <input type="submit" value="上传文件">
 </form>
 </body>
